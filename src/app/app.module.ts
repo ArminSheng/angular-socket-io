@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { from } from 'rxjs';
+import { ChatListComponent } from './chat-list/chat-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChatListComponent
   ],
   imports: [
     BrowserModule,

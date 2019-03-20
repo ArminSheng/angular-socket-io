@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import io from 'socket.io-client';
-import { log } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +7,9 @@ import { log } from 'util';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'angular-socket';
   private socket;
+  title = 'angular-socket';
+  messageList = [];
   inputText = '';
 
   constructor () {
@@ -17,10 +17,15 @@ export class AppComponent implements OnInit {
   }
   
   ngOnInit () {
-    this.socket.emit('chat', 'hello!');
+    this.socket.emit('join', 'hello!');
     this.socket.on('chat', msg => {
-      
-    })
+      this.addMsg(msg);
+      this.inputText = '';
+    });
+  }
+
+  addMsg (msg: string) {
+    this.messageList.push(msg)
   }
 
   enter () {

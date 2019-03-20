@@ -4,6 +4,10 @@
     Welcome to {{ title }}!
   </h1>
 
+  <div class="chat-wrap">
+    <app-chat-list [list]="messageList"></app-chat-list>
+  </div>
+
   <div class="text-input-wrap">
     <input class="text-input" [(ngModel)]="inputText" type="text" (keyup.enter)="enter()">
   </div>
