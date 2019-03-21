@@ -1,0 +1,11 @@
+<form class="input-form">
+  <mat-form-field class="full-width">
+    <input 
+      type="text"
+      [(ngModel)]="inputText" 
+      (keyup.enter)="enter()" 
+      matInput 
+      placeholder="Type here" 
+      name="text">
+  </mat-form-field>
+</form>

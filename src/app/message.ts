@@ -1,6 +1,11 @@
 export class Message {
-    id: number;
+    id?: number;
     text: string;
-    date: Date;
+    timestamp: number;
     username: string;
+
+    constructor (text: string, timestamp: number) {
+        this.text = text;
+        this.timestamp = timestamp;
+    }
 }

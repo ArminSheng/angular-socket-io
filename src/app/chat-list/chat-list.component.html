@@ -1,5 +1,6 @@
 <div class="chat-list">
   <div *ngFor="let msg of list" class="message-item">
-    {{ msg }}
+    <p>{{ msg.timestamp | date: 'yy/M/d hh:mm:ss' }}</p>
+    <p>{{ msg.text }}</p>
   </div>
 </div>

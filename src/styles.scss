@@ -1,4 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import "normalize.css";
+
+html, body {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+div {
+    box-sizing: border-box;
+}
+
 .text-center {
     text-align: center;
+}
+
+.full-width {
+    width: 100%;
 }

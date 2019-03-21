@@ -9,7 +9,7 @@
   </div>
 
   <div class="text-input-wrap">
-    <input class="text-input" [(ngModel)]="inputText" type="text" (keyup.enter)="enter()">
+    <app-input-area (entered)="enter($event)"></app-input-area>
   </div>
 </div>
 
