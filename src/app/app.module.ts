@@ -6,19 +6,24 @@ import { AppComponent } from './app.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { InputAreaComponent } from './input-area/input-area.component';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './components/material.module';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatListComponent,
-    InputAreaComponent
+    InputAreaComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+  ],
+  entryComponents: [
+    LoginDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
