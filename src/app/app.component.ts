@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import io from 'socket.io-client';
-import {Message} from './message';
+import { Message } from './models/message';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
   messageList = [];
 
   constructor () {
-    this.socket = io('http://192.168.0.103:3000');
+    // this.socket = io('http://192.168.0.103:3000');
+    this.socket = io('http://localhost:3000');
   }
   
   ngOnInit () {

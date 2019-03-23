@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import io from 'socket.io-client';
 
+const SERVER_HOST = 'http://localhost:3000';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SocketServiceService {
   private socket;
-  private defaultServer = 'http://192.168.0.106:3000'
+  private defaultServer = SERVER_HOST;
 
   constructor() { }
 
