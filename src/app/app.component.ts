@@ -38,23 +38,21 @@ export class AppComponent implements OnInit {
       //   avatar: 'https://avatars2.githubusercontent.com/u/10386102?s=40&v=4'
       // }
 
-      this.openLoginDialog();
-
+      setTimeout(() => this.openLoginDialog(), 0);
     }
   }
 
   openLoginDialog () {
+    const user = this.user;
     const dialog = this.dialog.open(LoginDialogComponent);
 
     dialog.afterClosed().subscribe(username => {
+      this.user = new User(username);
+      
       if (!username) {
-        this.user = new User();
         return;
       }
 
-      this.user = {
-        username
-      };
 
       this.join();
     });
@@ -62,8 +60,6 @@ export class AppComponent implements OnInit {
 
   listenToChat () {
     this.socket.on('chat', (msg: Message) => {
-      console.log(msg);
-      
       this.addMsg(msg);
     });
   }
@@ -88,10 +84,11 @@ export class AppComponent implements OnInit {
     const msg: Message = {
       text,
       timestamp: Date.now(),
-      username: this.user.username
+      username: this.user.username,
+      user: this.user
     };
 
     this.socket.emit('chat', msg);
-    this.addMsg(msg);
+    this.addMsg({...msg, isSelf: true});
   }
 }

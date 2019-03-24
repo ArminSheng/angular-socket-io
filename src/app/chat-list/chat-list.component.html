@@ -4,9 +4,18 @@
       <p class="chat-message-info">{{ msg.text }}</p>
     </div>
     <ng-template #elseBlock>
-      <p><strong>{{ msg.username || 'Anonymous' }}</strong>
-         {{ msg.timestamp | date: 'yyyy/M/d hh:mm:ss' }}</p>
-      <p>{{ msg.text }}</p>
+      <div class="chat-msg-block" [class.self]="msg.isSelf">
+        <img class="chat-msg-avatar" [src]="msg.user.avatar" alt="">
+        <div class="chat-msg-content">
+          <p>
+            <strong>
+              {{ msg.username || 'Anonymous' }}
+            </strong>
+             {{ msg.timestamp | date: 'yyyy/M/d hh:mm:ss' }}
+          </p>
+          <p class="chat-msg-text">{{ msg.text }}</p>
+        </div>
+      </div>
     </ng-template>
   </div>
 </div>
