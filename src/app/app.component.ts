@@ -4,6 +4,7 @@ import { Message } from './models/message';
 import { User } from './models/User';
 import { MatDialog } from '@angular/material';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { SocketIoService } from './socket-io.service';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +16,22 @@ export class AppComponent implements OnInit {
   title = 'angular-socket';
   messageList = [];
   user: User;
+  roomid: 1;
 
-  constructor (public dialog: MatDialog) {
-    // this.socket = io('http://192.168.0.103:3000');
+  constructor (public dialog: MatDialog, public socketIo: SocketIoService) {
     this.socket = io('http://localhost:3000');
+
+    this.socket.on('connect_timeout', (timeout) => {
+      console.log('timeout', timeout);
+    });
+    this.socket.on('connect_error', (err) => {
+      console.log('err', err);
+    });
   }
   
   ngOnInit () {
     this.listenToChat();
+    // this.socketIo.init();
     this.checkUser();
     this.onUserJoined();
   }
@@ -53,8 +62,7 @@ export class AppComponent implements OnInit {
         return;
       }
 
-
-      this.join();
+      this.join(this.roomid);
     });
   }
 
@@ -64,8 +72,8 @@ export class AppComponent implements OnInit {
     });
   }
 
-  join () {
-    this.socket.emit('user join', this.user);
+  join (roomid) {
+    this.socket.emit('user join', roomid, this.user);
   }
 
   onUserJoined () {
@@ -88,7 +96,7 @@ export class AppComponent implements OnInit {
       user: this.user
     };
 
-    this.socket.emit('chat', msg);
+    this.socket.emit('chat', this.roomid, msg);
     this.addMsg({...msg, isSelf: true});
   }
 }
