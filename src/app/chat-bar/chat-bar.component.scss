@@ -1,0 +1,21 @@
+.chat-bar-list {
+
+    .chat-bar-item {
+        .chat-room-name {
+            color: #555;
+            font-size: 1.1rem;
+        }
+        .lightball {
+            display: inline-block;
+            margin-right: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1.5px solid #555; 
+            &.active {
+                background-color: green;
+                border-color: green;
+            }
+        }
+    }
+}

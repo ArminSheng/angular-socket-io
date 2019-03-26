@@ -8,13 +8,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { InputAreaComponent } from './input-area/input-area.component';
 import { MaterialModule } from './components/material.module';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { ChatBarComponent } from './chat-bar/chat-bar.component';
+import { NavLeftComponent } from './nav-left/nav-left.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatListComponent,
     InputAreaComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    ChatBarComponent,
+    NavLeftComponent
   ],
   imports: [
     BrowserModule,

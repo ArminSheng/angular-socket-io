@@ -1,0 +1,14 @@
+<div class="chat-bar-list">
+  <mat-nav-list>
+      <a 
+        mat-list-item 
+        [href]="" 
+        *ngFor="let room of rooms"
+        class="chat-bar-item"
+      >
+        <span class="lightball" [class.active]="room.isActive"></span>
+        <!-- <span class="chat-room-name">{{ room.name }} </span> -->
+        {{ room.name }} 
+      </a>
+    </mat-nav-list>
+</div>

@@ -16,22 +16,21 @@ export class AppComponent implements OnInit {
   title = 'angular-socket';
   messageList = [];
   user: User;
-  roomid: 1;
+  public roomid = 1;
 
   constructor (public dialog: MatDialog, public socketIo: SocketIoService) {
-    this.socket = io('http://localhost:3000');
+    // this.socket = io('http://192.168.0.102:3000');
 
-    this.socket.on('connect_timeout', (timeout) => {
-      console.log('timeout', timeout);
-    });
-    this.socket.on('connect_error', (err) => {
-      console.log('err', err);
-    });
+    // this.socket.on('connect_timeout', (timeout) => {
+    //   console.log('timeout', timeout);
+    // });
+    // this.socket.on('connect_error', (err) => {
+    //   console.log('err', err);
+    // });
   }
   
   ngOnInit () {
     this.listenToChat();
-    // this.socketIo.init();
     this.checkUser();
     this.onUserJoined();
   }
@@ -61,23 +60,23 @@ export class AppComponent implements OnInit {
       if (!username) {
         return;
       }
-
+      
       this.join(this.roomid);
     });
   }
 
   listenToChat () {
-    this.socket.on('chat', (msg: Message) => {
+    this.socketIo.getMessages().subscribe((msg: Message) => {
       this.addMsg(msg);
     });
   }
 
   join (roomid) {
-    this.socket.emit('user join', roomid, this.user);
+    this.socketIo.sendMessage('user join', roomid, this.user);
   }
 
   onUserJoined () {
-    this.socket.on('user joined', username => {
+    this.socketIo.onUserJoined().subscribe(username => {
       this.addMsg({
         text: `${username} joined the Chat`,
         type: 'info'
@@ -96,7 +95,7 @@ export class AppComponent implements OnInit {
       user: this.user
     };
 
-    this.socket.emit('chat', this.roomid, msg);
+    this.socketIo.sendMessage('chat', this.roomid, msg);
     this.addMsg({...msg, isSelf: true});
   }
 }
