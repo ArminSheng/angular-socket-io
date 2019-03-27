@@ -17,10 +17,9 @@ export class AppComponent implements OnInit {
   messageList = [];
   user: User;
   public roomid = 1;
+  // onlineUsers = [];
 
   constructor (public dialog: MatDialog, public socketIo: SocketIoService) {
-    // this.socket = io('http://192.168.0.102:3000');
-
     // this.socket.on('connect_timeout', (timeout) => {
     //   console.log('timeout', timeout);
     // });
@@ -30,22 +29,15 @@ export class AppComponent implements OnInit {
   }
   
   ngOnInit () {
-    this.listenToChat();
     this.checkUser();
-    this.onUserJoined();
   }
-
+  
   addMsg (msg: Message) {
-    this.messageList.push(msg)
+    this.messageList.push(msg);
   }
 
   checkUser () {
     if (!this.user) {
-      // const u: User = {
-      //   username: 'Armin',
-      //   avatar: 'https://avatars2.githubusercontent.com/u/10386102?s=40&v=4'
-      // }
-
       setTimeout(() => this.openLoginDialog(), 0);
     }
   }
@@ -56,22 +48,23 @@ export class AppComponent implements OnInit {
 
     dialog.afterClosed().subscribe(username => {
       this.user = new User(username);
-      
-      if (!username) {
-        return;
-      }
-      
+
+      this.socketIo.init(this.user);
       this.join(this.roomid);
+      this.listenToChat();
     });
   }
 
   listenToChat () {
+    this.onUserJoined();
+
     this.socketIo.getMessages().subscribe((msg: Message) => {
       this.addMsg(msg);
     });
   }
 
   join (roomid) {
+    // this.socketIo.sendMessage('user logined', this.user);
     this.socketIo.sendMessage('user join', roomid, this.user);
   }
 

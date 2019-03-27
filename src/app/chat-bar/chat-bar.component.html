@@ -6,9 +6,9 @@
         *ngFor="let room of rooms"
         class="chat-bar-item"
       >
-        <span class="lightball" [class.active]="room.isActive"></span>
+        <span class="lightball active" [class.active1]="room.isActive"></span>
         <!-- <span class="chat-room-name">{{ room.name }} </span> -->
-        {{ room.name }} 
+        {{ room.user.username }} 
       </a>
     </mat-nav-list>
 </div>

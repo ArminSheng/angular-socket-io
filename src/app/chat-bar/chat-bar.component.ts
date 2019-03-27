@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+const mock = [
+  {roomid: 1, name: 'Armin Sheng', isActive: true},
+  {roomid: 1, name: 'Jack Ma', isActive: false}
+];
 
 @Component({
   selector: 'app-chat-bar',
@@ -6,10 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./chat-bar.component.scss']
 })
 export class ChatBarComponent implements OnInit {
-  @Input() rooms: any[] = [
-    {roomid: 1, name: 'Armin Sheng', isActive: true},
-    {roomid: 1, name: 'Jack Ma', isActive: false}
-  ];
+  @Input() rooms: [];
 
   constructor() { }
 
