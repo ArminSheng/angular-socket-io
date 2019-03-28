@@ -1,0 +1,18 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="app-main">
+    <div class="app-nav-left">
+      <app-nav-left></app-nav-left>
+    </div>
+  
+    <div class="app-right-content">
+      <div class="chat-wrap">
+        <app-chat-list [list]="messageList"></app-chat-list>
+      </div>
+    
+      <div class="text-input-wrap">
+        <app-input-area (entered)="enter($event)"></app-input-area>
+      </div>
+    </div>
+  </div>
+  
+  

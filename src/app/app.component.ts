@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
   
   ngOnInit () {
-    this.checkUser();
+    // this.checkUser();
   }
   
   addMsg (msg: Message) {

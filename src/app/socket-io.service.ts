@@ -20,7 +20,6 @@ export class SocketIoService {
 
   init (user?: User) {
     this.connect();
-    console.log('init')
     this.sendMessage('user logined', user);
   }
 
@@ -28,8 +27,11 @@ export class SocketIoService {
     if (this.socket && this.socket.connected) return;
     this.socket = io(this.defaultServer);
     this.socketid = this.socket.id;
-    console.log('prev')
-    this.socket.on('disconnect', this.socket.open);
+
+    this.socket.on('disconnect', () => {
+      this.socket.connect();
+      console.log('disconnect reopen');
+    });
   }
 
   onUserJoined () {

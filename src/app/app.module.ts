@@ -10,6 +10,9 @@ import { MaterialModule } from './components/material.module';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { ChatBarComponent } from './chat-bar/chat-bar.component';
 import { NavLeftComponent } from './nav-left/nav-left.component';
+import { AppRoutingModule } from './app-routing.module';
+import { MainComponent } from './main/main.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import { NavLeftComponent } from './nav-left/nav-left.component';
     InputAreaComponent,
     LoginDialogComponent,
     ChatBarComponent,
-    NavLeftComponent
+    NavLeftComponent,
+    MainComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    AppRoutingModule,
   ],
   entryComponents: [
     LoginDialogComponent
