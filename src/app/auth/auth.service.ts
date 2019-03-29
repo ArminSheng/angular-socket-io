@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   isLoggedIn = false;
   redirectUrl = '';
-  user;
+  user: User;
 
   constructor() { }
 
