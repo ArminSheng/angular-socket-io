@@ -8,14 +8,12 @@ import { SocketIoService } from '../socket-io.service';
 })
 export class NavLeftComponent implements OnInit {
   rooms = [];
-  constructor(private socket: SocketIoService) { }
+  constructor(private socketService: SocketIoService) { }
 
   ngOnInit() {
     // this.rooms = this.socket.onlineUsers;
-    this.socket.getOnlineUsers().subscribe((res: []) => {
-      console.log(res);
-      
-      const idx = res.findIndex(s => s.id === this.socket.socketid);
+    this.socketService.getOnlineUsers().subscribe((res: []) => {
+      const idx = res.findIndex((s: any) => s.id === this.socketService.socketid);
       res.splice(idx, 1);
       console.log(idx, res);
       this.rooms = res;

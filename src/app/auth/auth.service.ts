@@ -11,7 +11,12 @@ export class AuthService {
 
   constructor() { }
 
-  login () {
+  getUser () {
+    return this.user;
+  }
+
+  login (user: User) {
+    this.user = user;
     this.isLoggedIn = true;
   }
 

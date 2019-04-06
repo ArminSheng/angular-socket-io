@@ -23,12 +23,12 @@
 
   <div class="login-form">
     <mat-form-field>
-        <input (keyup.enter)="login()" matInput placeholder="Your Name">
+        <input #name (keyup.enter)="login(name.value)" matInput placeholder="Your Name">
     </mat-form-field>
     <!-- <mat-card>
     </mat-card> -->
   </div>
-  <button mat-button (click)="login()">
+  <button mat-button (click)="login(name.value)">
     Login
     <mat-icon>send</mat-icon>
     <!-- <mat-icon svgIcon="thumbs-up"></mat-icon> -->

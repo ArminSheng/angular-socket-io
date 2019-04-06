@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocketIoService } from '../socket-io.service';
 import { Message } from '../models/message';
 import { User } from '../models/User';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -13,25 +14,22 @@ export class MainComponent implements OnInit {
   title = 'angular-socket';
   messageList = [];
   user: User;
-  public roomid = 1;
+  public roomid = 'abc';
 
-  constructor(public socketIo: SocketIoService) { }
+  constructor(public socketIo: SocketIoService, 
+    private authService: AuthService) { }
 
   ngOnInit () {
+    this.user = this.authService.getUser();
+    
     this.socketIo.init(this.user);
-    this.checkUser();
+    this.join();
     this.onUserJoined();
+    this.listenToChat();
   }
   
   addMsg (msg: Message) {
     this.messageList.push(msg);
-  }
-
-  checkUser () {
-    // if (!this.user) {
-    //   setTimeout(() => this.openLoginDialog(), 0);
-    // }
-    this.listenToChat();
   }
 
   // openLoginDialog () {
@@ -48,19 +46,18 @@ export class MainComponent implements OnInit {
   // }
 
   listenToChat () {
-    this.onUserJoined();
-
     this.socketIo.getMessages().subscribe((msg: Message) => {
       this.addMsg(msg);
     });
   }
 
-  join (roomid) {
-    // this.socketIo.sendMessage('user logined', this.user);
-    this.socketIo.sendMessage('user join', roomid, this.user);
+  join () {
+    this.socketIo.join(this.roomid);
   }
 
   onUserJoined () {
+    console.log('onjoin');
+    
     this.socketIo.onUserJoined().subscribe(username => {
       this.addMsg({
         text: `${username} joined the Chat`,
@@ -79,7 +76,7 @@ export class MainComponent implements OnInit {
       username: this.user.username,
       user: this.user
     };
-
+    
     this.socketIo.sendMessage('chat', this.roomid, msg);
     this.addMsg({...msg, isSelf: true});
   }
