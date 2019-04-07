@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   title = 'angular-socket';
   messageList = [];
   user: User;
-  public roomid = 'abc';
+  public roomid = 'common room';
 
   constructor(public socketIo: SocketIoService, 
     private authService: AuthService) { }
@@ -56,8 +56,6 @@ export class MainComponent implements OnInit {
   }
 
   onUserJoined () {
-    console.log('onjoin');
-    
     this.socketIo.onUserJoined().subscribe(username => {
       this.addMsg({
         text: `${username} joined the Chat`,

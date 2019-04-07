@@ -14,8 +14,11 @@ export class NavLeftComponent implements OnInit {
     // this.rooms = this.socket.onlineUsers;
     this.socketService.getOnlineUsers().subscribe((res: []) => {
       const idx = res.findIndex((s: any) => s.id === this.socketService.socketid);
-      res.splice(idx, 1);
-      console.log(idx, res);
+
+      if (idx > -1) {
+        res.splice(idx, 1);
+      }
+
       this.rooms = res;
     });
   }
