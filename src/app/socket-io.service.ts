@@ -22,14 +22,17 @@ export class SocketIoService {
   }
   
   init (user?: User) {
-    this.user = this.authService.getUser();
-    this.socket = io(this.defaultServer);
-    this.sendMessage('user logined', user);
+    return new Observable(obs => {
+      this.user = this.authService.getUser();
+      this.socket = io(this.defaultServer);
+      this.sendMessage('user logined', user);
+  
+      this.connect().subscribe(() => {
+        this.onDisconnect();
+      });
 
-    this.connect().subscribe(() => {
-      this.onDisconnect();
+      obs.next();
     });
-    
   }
 
   connect () {

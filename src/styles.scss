@@ -2,9 +2,15 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 @import "normalize.css";
+@import "flex.css";
 
 $green-weak: #e8f6fb;
 $green: #458e83;
+$border: 1px solid #dadce0;
+
+* {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
 
 html, body {
     height: 100%;
@@ -21,4 +27,17 @@ div {
 
 .full-width {
     width: 100%;
+}
+
+.lightball {
+    display: inline-block;
+    // margin-right: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #555; 
+    &.active {
+        background-color: green;
+        border-color: green;
+    }
 }

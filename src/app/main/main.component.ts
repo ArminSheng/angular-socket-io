@@ -11,7 +11,6 @@ import { AuthService } from '../auth/auth.service';
 })
 export class MainComponent implements OnInit {
   private socket;
-  title = 'angular-socket';
   messageList = [];
   user: User;
   public roomid = 'common room';
@@ -22,7 +21,7 @@ export class MainComponent implements OnInit {
   ngOnInit () {
     this.user = this.authService.getUser();
     
-    this.socketIo.init(this.user);
+    this.socketIo.init(this.user).subscribe();
     this.join();
     this.onUserJoined();
     this.listenToChat();
@@ -31,6 +30,10 @@ export class MainComponent implements OnInit {
   addMsg (msg: Message) {
     this.messageList.push(msg);
   }
+
+  // heartbeat () {
+  //   interval
+  // }
 
   // openLoginDialog () {
   //   const user = this.user;

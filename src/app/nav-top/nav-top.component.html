@@ -1,0 +1,26 @@
+<div class="nav-top">
+  <div class="nav-top-inner" flex="cross:center">
+    <div class="info-block" flex-box="1">
+      <div  class="room-info">
+        <div class="room-name">{{ user.username }}</div>
+        <div>
+          <span class="lightball active"></span>
+          <span class="room-state-text">Active</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-btns" flex-box="1" flex="dir:right">
+      <div class="nav-btn">
+        <img class="user-avatar" [src]="user.avatar">
+      </div>
+
+      <div class="nav-btn">
+        <mat-icon>settings</mat-icon>
+      </div>
+      <div class="nav-btn">
+        <mat-icon>search</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

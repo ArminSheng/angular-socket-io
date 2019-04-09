@@ -4,7 +4,9 @@
       <app-nav-left></app-nav-left>
     </div>
   
-    <div class="app-right-content">
+    <div class="app-right-content" flex="dir:top">
+      <app-nav-top></app-nav-top>
+
       <div class="chat-wrap">
         <app-chat-list [list]="messageList"></app-chat-list>
       </div>

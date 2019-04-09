@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "core-js": "^2.5.4",
+    "flex.css": "^1.1.7",
     "material-design-icons": "^3.0.1",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.3.3",

@@ -13,6 +13,7 @@ import { NavLeftComponent } from './nav-left/nav-left.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
+import { NavTopComponent } from './nav-top/nav-top.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LoginComponent } from './login/login.component';
     ChatBarComponent,
     NavLeftComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    NavTopComponent
   ],
   imports: [
     BrowserModule,
