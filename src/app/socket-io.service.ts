@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import io from 'socket.io-client';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { User } from './models/User';
 import { AuthService } from './auth/auth.service';
 import { log } from 'util';
@@ -26,26 +26,29 @@ export class SocketIoService {
       this.user = this.authService.getUser();
       this.socket = io(this.defaultServer);
       this.sendMessage('user logined', user);
-  
-      this.connect().subscribe(() => {
-        this.onDisconnect();
-      });
+      const heatbeart$ = this.heartbeat();
+
+      this.onConnect().subscribe();
 
       obs.next();
+
+      return {unsubscribe: () => {
+        heatbeart$.unsubscribe();
+        this.socket.close();
+      }};
     });
   }
 
-  connect () {
+  heartbeat () {
+    const interval$ = interval(3000).subscribe(() => {
+      this.sendMessage('heartbeat');
+    });
+
+    return interval$;
+  }
+
+  onConnect () {
     return new Observable(obs => {
-      // if (this.socket) {
-      //   if (this.socket.disconnect) {
-      //     this.socket.connect();
-      //   }
-
-      //   obs.next(this.socket);
-      //   return;
-      // }
-
       this.socket.on('connect', () => {
         this.socketid = this.socket.id;
       });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SocketIoService } from '../socket-io.service';
 import { Message } from '../models/message';
 import { User } from '../models/User';
@@ -9,11 +9,12 @@ import { AuthService } from '../auth/auth.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   private socket;
   messageList = [];
   user: User;
   public roomid = 'common room';
+  unsubscirbe;
 
   constructor(public socketIo: SocketIoService, 
     private authService: AuthService) { }
@@ -21,10 +22,16 @@ export class MainComponent implements OnInit {
   ngOnInit () {
     this.user = this.authService.getUser();
     
-    this.socketIo.init(this.user).subscribe();
+    this.unsubscirbe = this.socketIo.init(this.user)
+      .subscribe().unsubscribe;
+    
     this.join();
     this.onUserJoined();
     this.listenToChat();
+  }
+
+  ngOnDestroy () {
+    this.unsubscirbe();
   }
   
   addMsg (msg: Message) {
